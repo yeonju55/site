@@ -33,9 +33,9 @@ class CalendarView(generic.ListView):
         context['next_month'] = next_month(d)
         return context
 
-def get_date(req_day):
-    if req_day:
-        year, month = (int(x) for x in req_day.split('-'))
+def get_date(req_month):
+    if req_month:
+        year, month = (int(x) for x in req_month.split('-'))
         return date(year, month, day=1)
     return datetime.today()
 
