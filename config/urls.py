@@ -14,13 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,include
 from common import views
+from django.conf import settings
+from django.conf.urls.static import static
 
+app_name = 'config'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('common/', include('common.urls')),
-    path('', views.index, name='index'), #'/'에 해당하는 path
-    path('', include('cal.urls')),
-]
+    path('pybo/', include('pybo.urls')),
+    path('', views.index, name='index'),
+    path(r'^calendar/$', include('cal.urls')),
+    #path('map/', include('map.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
